@@ -17,147 +17,95 @@
 
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
             padding: 20px;
-            overflow: auto;
             position: relative;
-        }
-
-        /* Фоновое изображение */
-        .background-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('2026.png');
+            background: url('2026.png') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: -2;
-        }
-
-        /* Затемняющий слой для лучшей читаемости текста */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: -1;
-        }
-
-        .countdown-container {
+            color: white;
             text-align: center;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            max-width: 600px;
-            width: 100%;
-            margin: 20px 0;
         }
 
+        /* Убираем все затемнения и оверлеи */
         .title {
-            color: #ffffff;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-            line-height: 1.3;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+            font-weight: bold;
+        }
+
+        .countdown {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .days {
+            font-size: 6rem;
+            font-weight: 900;
+            text-shadow: 
+                4px 4px 12px rgba(0, 0, 0, 0.9),
+                0 0 30px #ffcc00,
+                0 0 60px #ffcc00;
+            color: #ffdb4d;
+            margin-bottom: 1rem;
         }
 
         .time-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.2rem;
-            margin: 2rem 0;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .time-block {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 1.5rem 1rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            min-height: 120px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            align-items: center;
         }
 
         .time-value {
             font-size: 3rem;
             font-weight: 800;
-            color: #4df0ff;
             text-shadow: 
-                0 0 10px #00ffff,
-                0 0 20px #00ffff;
+                3px 3px 8px rgba(0, 0, 0, 0.8),
+                0 0 20px #00ffff,
+                0 0 40px #00ffff;
+            color: #4df0ff;
             margin-bottom: 0.5rem;
-            font-family: 'Arial Black', Gadget, sans-serif;
-            line-height: 1;
         }
 
         .time-label {
-            font-size: 1.1rem;
-            color: #e6e6e6;
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+            color: #ffffff;
             text-transform: uppercase;
-            letter-spacing: 1px;
             font-weight: 600;
         }
 
-        .days-block {
-            grid-column: 1 / -1;
-            min-height: 140px;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .days-value {
-            font-size: 4.5rem;
-            color: #ffdb4d;
-            text-shadow: 
-                0 0 15px #ffcc00,
-                0 0 30px #ffcc00;
-        }
-
         .new-year {
-            color: #ffdb4d;
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: bold;
-            text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
-            margin-top: 1.5rem;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
-            margin: 2rem 0;
-            overflow: hidden;
-        }
-
-        .progress {
-            height: 100%;
-            background: linear-gradient(90deg, #4df0ff, #ffdb4d);
-            border-radius: 4px;
-            transition: width 0.3s ease;
+            text-shadow: 
+                3px 3px 8px rgba(0, 0, 0, 0.8),
+                0 0 20px #ffcc00,
+                0 0 40px #ffcc00;
+            color: #ffdb4d;
+            margin-top: 2rem;
         }
 
         .current-date {
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
             color: #aaffaa;
-            font-size: 1rem;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             opacity: 0.9;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         /* Анимация пульсации */
@@ -167,7 +115,7 @@
                 opacity: 1; 
             }
             50% { 
-                transform: scale(1.03);
+                transform: scale(1.05);
                 opacity: 0.9; 
             }
         }
@@ -177,86 +125,67 @@
         }
 
         /* Адаптивность */
-        @media (max-width: 600px) {
-            .countdown-container {
-                padding: 2rem 1.5rem;
-                margin: 15px 0;
-            }
-            
+        @media (max-width: 768px) {
             .title {
-                font-size: 1.5rem;
-                margin-bottom: 1.2rem;
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
             }
             
-            .time-grid {
-                gap: 1rem;
-                margin: 1.5rem 0;
-            }
-            
-            .time-block {
-                padding: 1.2rem 0.8rem;
-                min-height: 110px;
+            .days {
+                font-size: 4.5rem;
             }
             
             .time-value {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             
             .time-label {
                 font-size: 1rem;
             }
             
-            .days-block {
-                min-height: 120px;
-            }
-            
-            .days-value {
-                font-size: 3.5rem;
-            }
-            
             .new-year {
-                font-size: 2rem;
-                margin-top: 1.2rem;
+                font-size: 2.2rem;
+            }
+            
+            .time-grid {
+                gap: 1.5rem;
             }
         }
 
-        @media (max-width: 400px) {
-            .countdown-container {
-                padding: 1.5rem 1rem;
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.7rem;
+            }
+            
+            .days {
+                font-size: 3.5rem;
             }
             
             .time-value {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
-            .days-value {
-                font-size: 3rem;
+            .time-grid {
+                gap: 1rem;
             }
             
-            .time-block {
-                padding: 1rem 0.5rem;
-                min-height: 95px;
+            .new-year {
+                font-size: 1.8rem;
+            }
+            
+            .current-date {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Фоновая картинка -->
-    <div class="background-image"></div>
-    
-    <!-- Затемняющий слой -->
-    <div class="overlay"></div>
-    
-    <!-- Основной контент -->
-    <div class="countdown-container">
+    <div class="countdown">
         <div class="title">До Нового 2026 года осталось:</div>
         
+        <div class="days pulse" id="days">0</div>
+        
         <div class="time-grid">
-            <div class="time-block days-block">
-                <div class="time-value days-value pulse" id="days">0</div>
-                <div class="time-label" id="days-label">дней</div>
-            </div>
-            
             <div class="time-block">
                 <div class="time-value" id="hours">00</div>
                 <div class="time-label" id="hours-label">часов</div>
@@ -271,10 +200,6 @@
                 <div class="time-value" id="seconds">00</div>
                 <div class="time-label" id="seconds-label">секунд</div>
             </div>
-        </div>
-        
-        <div class="progress-bar">
-            <div class="progress" id="progress"></div>
         </div>
         
         <div class="new-year">2026</div>
@@ -312,17 +237,9 @@
             document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
             
             // Обновление подписей с правильными окончаниями
-            document.getElementById('days-label').textContent = getRussianForm(days, ['день', 'дня', 'дней']);
             document.getElementById('hours-label').textContent = getRussianForm(hours, ['час', 'часа', 'часов']);
             document.getElementById('minutes-label').textContent = getRussianForm(minutes, ['минута', 'минуты', 'минут']);
             document.getElementById('seconds-label').textContent = getRussianForm(seconds, ['секунда', 'секунды', 'секунд']);
-            
-            // Расчет прогресса (сколько процентов года прошло)
-            const startOfYear = new Date('January 1, 2025 00:00:00');
-            const totalYearMs = newYear - startOfYear;
-            const passedMs = now - startOfYear;
-            const progress = Math.min((passedMs / totalYearMs) * 100, 100);
-            document.getElementById('progress').style.width = progress + '%';
             
             // Обновление текущей даты
             const options = { 
