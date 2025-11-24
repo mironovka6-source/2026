@@ -21,14 +21,21 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background: 
-                linear-gradient(135deg, rgba(15, 32, 39, 0.9), rgba(32, 58, 67, 0.9), rgba(44, 83, 100, 0.9)),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><path fill="%230A5F38" d="M100 20 L140 80 L60 80 Z"/><path fill="%230A5F38" d="M100 50 L160 120 L40 120 Z"/><path fill="%230A5F38" d="M100 80 L180 160 L20 160 Z"/><rect x="90" y="160" width="20" height="30" fill="%238B4513"/><circle cx="80" cy="60" r="8" fill="%23FFD700"/><circle cx="120" cy="90" r="8" fill="%23FF4500"/><circle cx="70" cy="120" r="8" fill="%23FF69B4"/><circle cx="130" cy="130" r="8" fill="%2300BFFF"/></svg>');
-            background-size: cover, 300px 300px;
-            background-position: center, center;
-            background-repeat: no-repeat, repeat;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #snowfall {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
         }
 
         .countdown-container {
@@ -43,6 +50,7 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             max-width: 600px;
             width: 100%;
+            z-index: 1;
         }
 
         .title {
@@ -169,14 +177,12 @@
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
-            
-            body {
-                background-size: cover, 200px 200px;
-            }
         }
     </style>
 </head>
 <body>
+    <canvas id="snowfall"></canvas>
+    
     <div class="countdown-container">
         <div class="title">До Нового 2026 года осталось:</div>
         
@@ -211,9 +217,8 @@
     </div>
 
     <script>
+        // Функция для правильного склонения слов
         function getRussianForm(number, forms) {
-            // forms: [одна, две, пять] - для женского рода (минута, секунда)
-            // или [один, два, пять] - для мужского рода (час, день)
             number = Math.abs(number) % 100;
             let remainder = number % 10;
             
@@ -223,6 +228,7 @@
             return forms[2];
         }
 
+        // Функция для отсчета времени
         function updateCountdown() {
             const newYear = new Date('January 1, 2026 00:00:00');
             const now = new Date();
@@ -274,11 +280,92 @@
             }
         }
 
-        // Обновляем счетчик сразу при загрузке
-        updateCountdown();
+        // Анимация снегопада
+        function createSnowfall() {
+            const canvas = document.getElementById('snowfall');
+            const ctx = canvas.getContext('2d');
+            
+            // Установка размеров canvas
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Снежинки
+            const snowflakes = [];
+            const snowflakeCount = 150;
+            
+            // Класс снежинки
+            class Snowflake {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 4 + 1;
+                    this.speed = Math.random() * 2 + 1;
+                    this.wind = Math.random() * 1 - 0.5;
+                    this.opacity = Math.random() * 0.5 + 0.3;
+                    this.swing = Math.random() * 0.5;
+                    this.swingSpeed = Math.random() * 0.02 + 0.01;
+                    this.swingOffset = Math.random() * Math.PI * 2;
+                }
+                
+                update() {
+                    this.y += this.speed;
+                    this.x += this.wind + Math.sin(this.swingOffset + Date.now() * this.swingSpeed) * this.swing;
+                    
+                    // Если снежинка упала за нижний край, перемещаем её вверх
+                    if (this.y > canvas.height) {
+                        this.y = -10;
+                        this.x = Math.random() * canvas.width;
+                    }
+                    
+                    // Если снежинка ушла за боковые края, перемещаем её на другую сторону
+                    if (this.x > canvas.width + 10) {
+                        this.x = -10;
+                    } else if (this.x < -10) {
+                        this.x = canvas.width + 10;
+                    }
+                }
+                
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                    ctx.fill();
+                    ctx.closePath();
+                }
+            }
+            
+            // Создаем снежинки
+            for (let i = 0; i < snowflakeCount; i++) {
+                snowflakes.push(new Snowflake());
+            }
+            
+            // Анимация
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Рисуем снежинки
+                for (const snowflake of snowflakes) {
+                    snowflake.update();
+                    snowflake.draw();
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
 
-        // Обновляем счетчик каждую секунду
-        setInterval(updateCountdown, 1000);
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCountdown();
+            createSnowfall();
+            setInterval(updateCountdown, 1000);
+        });
     </script>
 </body>
 </html>
