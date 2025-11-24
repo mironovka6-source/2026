@@ -25,24 +25,36 @@
             font-family: 'Arial', sans-serif;
             padding: 20px;
             position: relative;
-            background: 
-                #000000 /* Черный фон на случай, если изображение не загрузится */,
-                url('2026.png') no-repeat center center;
-            background-size: contain;
-            background-color: #000000;
             color: white;
             text-align: center;
+            overflow: hidden;
+        }
+
+        /* Фоновая картинка */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                #000000,
+                url('2026.png') no-repeat center center;
+            background-size: cover;
+            background-color: #000000;
+            z-index: -1;
         }
 
         .title {
-            font-size: 3.5rem; /* Увеличил размер */
-            margin-bottom: 2.5rem; /* Увеличил отступ */
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
             text-shadow: 
                 4px 4px 12px rgba(0, 0, 0, 0.9),
                 0 0 15px #ffcc00,
                 0 0 30px #ffcc00;
             font-weight: bold;
-            color: #ffdb4d; /* Сделал золотистым как год */
+            color: #ffdb4d;
             line-height: 1.2;
         }
 
@@ -148,7 +160,7 @@
         /* Адаптивность */
         @media (max-width: 768px) {
             .title {
-                font-size: 2.8rem; /* Увеличил для планшетов */
+                font-size: 2.8rem;
                 margin-bottom: 2rem;
             }
             
@@ -179,7 +191,7 @@
 
         @media (max-width: 480px) {
             .title {
-                font-size: 2.2rem; /* Увеличил для мобильных */
+                font-size: 2.2rem;
                 margin-bottom: 1.8rem;
             }
             
@@ -211,7 +223,7 @@
         /* Для очень широких экранов */
         @media (min-width: 1600px) {
             .title {
-                font-size: 4.5rem; /* Еще больше для широких экранов */
+                font-size: 4.5rem;
                 margin-bottom: 3rem;
             }
             
