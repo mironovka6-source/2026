@@ -24,25 +24,24 @@
             margin: 0;
             font-family: 'Arial', sans-serif;
             padding: 20px;
-            position: relative;
             color: white;
             text-align: center;
+            background-color: #000000;
+            position: relative;
             overflow: hidden;
         }
 
-        /* Фоновая картинка */
-        body::before {
-            content: '';
+        /* Фоновое изображение */
+        .background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                #000000,
-                url('2026.png') no-repeat center center;
-            background-size: cover;
-            background-color: #000000;
+            background-image: url('2026.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
             z-index: -1;
         }
 
@@ -246,6 +245,10 @@
     </style>
 </head>
 <body>
+    <!-- Фоновое изображение -->
+    <div class="background"></div>
+    
+    <!-- Основной контент -->
     <div class="countdown">
         <div class="title">До Нового 2026 года осталось:</div>
         
