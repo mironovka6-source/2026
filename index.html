@@ -25,11 +25,8 @@
             font-family: 'Arial', sans-serif;
             padding: 20px;
             position: relative;
-            background: 
-                #000000 /* Черный фон на случай, если изображение не загрузится */,
-                url('2026.png') no-repeat center center;
-            background-size: contain;
-            background-color: #000000;
+            background: url('2026.png') no-repeat center center fixed;
+            background-size: cover;
             color: white;
             text-align: center;
         }
@@ -199,29 +196,6 @@
             
             .current-date {
                 font-size: 1rem;
-            }
-        }
-
-        /* Для очень широких экранов */
-        @media (min-width: 1600px) {
-            .title {
-                font-size: 3rem;
-            }
-            
-            .days {
-                font-size: 7rem;
-            }
-            
-            .days-label {
-                font-size: 2.5rem;
-            }
-            
-            .time-value {
-                font-size: 3.5rem;
-            }
-            
-            .new-year {
-                font-size: 3.5rem;
             }
         }
     </style>
