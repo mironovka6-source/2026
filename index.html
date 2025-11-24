@@ -25,17 +25,25 @@
             font-family: 'Arial', sans-serif;
             padding: 20px;
             position: relative;
-            background: url('2026.png') no-repeat center center fixed;
-            background-size: cover;
+            background: 
+                #000000 /* Черный фон на случай, если изображение не загрузится */,
+                url('2026.png') no-repeat center center;
+            background-size: contain;
+            background-color: #000000;
             color: white;
             text-align: center;
         }
 
         .title {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+            font-size: 3.5rem; /* Увеличил размер */
+            margin-bottom: 2.5rem; /* Увеличил отступ */
+            text-shadow: 
+                4px 4px 12px rgba(0, 0, 0, 0.9),
+                0 0 15px #ffcc00,
+                0 0 30px #ffcc00;
             font-weight: bold;
+            color: #ffdb4d; /* Сделал золотистым как год */
+            line-height: 1.2;
         }
 
         .countdown {
@@ -140,8 +148,8 @@
         /* Адаптивность */
         @media (max-width: 768px) {
             .title {
-                font-size: 2rem;
-                margin-bottom: 1.5rem;
+                font-size: 2.8rem; /* Увеличил для планшетов */
+                margin-bottom: 2rem;
             }
             
             .days {
@@ -171,7 +179,8 @@
 
         @media (max-width: 480px) {
             .title {
-                font-size: 1.7rem;
+                font-size: 2.2rem; /* Увеличил для мобильных */
+                margin-bottom: 1.8rem;
             }
             
             .days {
@@ -196,6 +205,30 @@
             
             .current-date {
                 font-size: 1rem;
+            }
+        }
+
+        /* Для очень широких экранов */
+        @media (min-width: 1600px) {
+            .title {
+                font-size: 4.5rem; /* Еще больше для широких экранов */
+                margin-bottom: 3rem;
+            }
+            
+            .days {
+                font-size: 7rem;
+            }
+            
+            .days-label {
+                font-size: 2.5rem;
+            }
+            
+            .time-value {
+                font-size: 3.5rem;
+            }
+            
+            .new-year {
+                font-size: 3.5rem;
             }
         }
     </style>
